@@ -1,4 +1,4 @@
-# telegram-qr-lib
+# telegram-qr
 
 A JavaScript library for generating Telegram-specific QR codes, leveraging the `qrcode-styling` library.
 
@@ -19,15 +19,15 @@ A JavaScript library for generating Telegram-specific QR codes, leveraging the `
 1.  **Install the package:**
 
     ```bash
-    npm install telegram-qr-lib
+    npm install telegram-qr
     # or
-    yarn add telegram-qr-lib
+    yarn add telegram-qr
     ```
 
 2.  **Import the library:**
 
     ```javascript
-    import { TELEGRAM_QR_CONFIG } from 'telegram-qr-lib';
+    import { TELEGRAM_QR_CONFIG } from 'telegram-qr';
     ```
 
 ## Usage Examples & API Documentation
@@ -37,7 +37,7 @@ The library exports a default configuration object (`TELEGRAM_QR_CONFIG`) which 
 **Example: Generating a QR code as a data URL**
 
 ```javascript
-import { TELEGRAM_QR_CONFIG } from 'telegram-qr-lib';
+import { TELEGRAM_QR_CONFIG } from 'telegram-qr';
 import QRCodeStyling from 'qrcode-styling'; // or your preferred qrcode library
 
 async function generateTelegramQR(telegramLink) {
@@ -61,7 +61,7 @@ main();
 
 **Explanation:**
 
-1.  We import `TELEGRAM_QR_CONFIG` from the `telegram-qr-lib`.
+1.  We import `TELEGRAM_QR_CONFIG` from the `telegram-qr`.
 2.  We create a new `QRCodeStyling` instance.
 3.  We override the `data` property with the desired Telegram link.
 4.  We use the `getBase64()` method to generate a data URL for the QR code image.
