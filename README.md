@@ -1,11 +1,10 @@
 <div align="center">
-
-# Telegram QR
-
+ 
+ <h1>Telegram QR</h1>
  <img width="30%" src="https://raw.coonlink.com/cloud/36852eae-81b0-46de-addf-99d17a362304.jpeg" />
 
-A lightweight, self-contained JavaScript library for generating styled QR codes optimized for Telegram. Supports canvas rendering, custom configurations, blue-themed variants, logo overlays, data URLs, and direct downloads.
-    
+ A lightweight, self-contained JavaScript library for generating styled QR codes optimized for Telegram. Supports canvas rendering, custom configurations, blue-themed variants, logo overlays, data URLs, and direct downloads.
+
 [![npm version](https://badge.fury.io/js/telegram-qr.svg)](https://badge.fury.io/js/telegram-qr)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
