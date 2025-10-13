@@ -1,105 +1,209 @@
-# telegram-qr
+<div align="center">
 
-A JavaScript library for generating Telegram-specific QR codes, leveraging the `qrcode-styling` library.
+# Telegram QR
 
-## Key Features & Benefits
+ <img width="30%" src="https://raw.coonlink.com/cloud/36852eae-81b0-46de-addf-99d17a362304.jpeg" />
 
-*   **Customizable QR Code Styling:** Utilize the `qrcode-styling` library for advanced customization options.
-*   **Telegram Optimized:** Pre-configured with settings suitable for use with Telegram bot integrations or linking directly to Telegram profiles/bots.
-*   **Easy Integration:** Simple to integrate into Node.js projects.
-*   **Lightweight:** Minimal dependencies and a small footprint.
+A lightweight, self-contained JavaScript library for generating styled QR codes optimized for Telegram. Supports canvas rendering, custom configurations, blue-themed variants, logo overlays, data URLs, and direct downloads.
+    
+[![npm version](https://badge.fury.io/js/telegram-qr.svg)](https://badge.fury.io/js/telegram-qr)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Prerequisites & Dependencies
+[![English](https://img.shields.io/badge/lang-English%20🇺🇸-white)](README.md)
+[![Русский](https://img.shields.io/badge/язык-Русский%20🇷🇺-white)](README.ru.md)
 
-*   Node.js (v14 or higher)
-*   npm or yarn
+<img alt="last-commit" src="https://img.shields.io/github/last-commit/crc137/telegram-qr?style=flat&amp;logo=git&amp;logoColor=white&amp;color=0080ff" style="margin: 0px 2px;">
+<img alt="repo-top-language" src="https://img.shields.io/github/languages/top/crc137/telegram-qr?style=flat&amp;color=0080ff" style="margin: 0px 2px;">
+<img alt="repo-language-count" src="https://img.shields.io/github/languages/count/crc137/telegram-qr?style=flat&amp;color=0080ff" style="margin: 0px 2px;">
+<img alt="version" src="https://img.shields.io/badge/version-1.0.0-blue" style="margin: 0px 2px;">
 
-## Installation & Setup Instructions
+</div>
 
-1.  **Install the package:**
+## Features
 
-    ```bash
-    npm install telegram-qr
-    # or
-    yarn add telegram-qr
-    ```
+- **Telegram-Styled QR Codes**: Rounded dots and extra-rounded corners for a modern look.
+- **Blue Variant**: One-click setup for Telegram's signature blue color scheme.
+- **Logo Support**: Easily embed logos or images in the center.
+- **Flexible Output**: Generate canvas elements, PNG data URLs, or download images directly.
+- **Customizable**: Override defaults for size, colors, margins, and more.
+- **ES Modules & CommonJS**: Works in browsers and Node.js environments.
+- **Self-Contained**: No external dependencies - everything is bundled.
 
-2.  **Import the library:**
+## Installation
 
-    ```javascript
-    import { TELEGRAM_QR_CONFIG } from 'telegram-qr';
-    ```
-
-## Usage Examples & API Documentation
-
-The library exports a default configuration object (`TELEGRAM_QR_CONFIG`) which can be used directly or modified to suit your needs.  It depends on `qrcore.js`, which provides a modified `qrcode-styling` component.  The primary usage is to generate a QR code that links to a Telegram resource (user, bot, etc.).
-
-**Example: Generating a QR code as a data URL**
-
-```javascript
-import { TELEGRAM_QR_CONFIG } from 'telegram-qr';
-import QRCodeStyling from 'qrcode-styling'; // or your preferred qrcode library
-
-async function generateTelegramQR(telegramLink) {
-    const qrCode = new QRCodeStyling({
-        ...TELEGRAM_QR_CONFIG, // Start with the default Telegram config
-        data: telegramLink,
-    });
-
-    return await qrCode.getBase64();
-}
-
-// Example usage:
-async function main() {
-    const telegramLink = "https://t.me/your_telegram_bot";
-    const qrCodeDataURL = await generateTelegramQR(telegramLink);
-    console.log(qrCodeDataURL); // You can then display this data URL as an image
-}
-
-main();
+```bash
+npm install telegram-qr
 ```
 
-**Explanation:**
+Or via CDN:
 
-1.  We import `TELEGRAM_QR_CONFIG` from the `telegram-qr`.
-2.  We create a new `QRCodeStyling` instance.
-3.  We override the `data` property with the desired Telegram link.
-4.  We use the `getBase64()` method to generate a data URL for the QR code image.
-5.  The resulting `qrCodeDataURL` can be used directly in an `<img>` tag, or processed further as needed.
+```html
+<script type="module" src="https://unpkg.com/telegram-qr@1.0.0/dist/index.js"></script>
+```
 
-**Note:** `qrcore.js` seems to be a customized version of `qrcode-styling`. If you prefer to use standard `qrcode-styling`, install it separately and adapt the example above. You might need to adapt the default configuration to align with telegram requirements.
+## Quick Start
 
-## Configuration Options
+### Basic Usage (Browser/Node.js)
 
-The `TELEGRAM_QR_CONFIG` object provides the following configurable options:
+```javascript
+import { createTelegramQR, downloadTelegramQR } from 'telegram-qr';
 
-| Option                 | Type     | Description                                                                                                        | Default Value                                                                            |
-| ---------------------- | -------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
-| `width`                | number   | Width of the QR code in pixels.                                                                                     | `240`                                                                                    |
-| `height`               | number   | Height of the QR code in pixels.                                                                                    | `240`                                                                                    |
-| `type`                 | string   | The output type of the QR code (`canvas`, `svg`, etc.).                                                              | `"canvas"`                                                                               |
-| `qrOptions`            | object   | Options for the QR code generation itself (e.g., error correction level).                                           | `{ typeNumber: 0, mode: "Byte", errorCorrectionLevel: "L" }`                               |
-| `dotsOptions`          | object   | Options for styling the dots of the QR code.                                                                      | `{ type: "rounded", color: "#000000" }`                                                  |
-| `cornersSquareOptions` | object   | Options for styling the square corners of the QR code.                                                             | `{ type: "extra-rounded", color: "#000000" }`                                             |
-| `cornersDotOptions`    | object   | Options for styling the dots within the corners of the QR code.                                                    | `{ color: "#000000" }`                                                                    |
-| `backgroundOptions`    | object   | Options for styling the background of the QR code.                                                                | `{ color: "#ffffff" }`                                                                    |
-| `imageOptions`         | object   | Options for embedding an image within the QR code (Refer to qrcode-styling library for available options)           | (See `index.js` -  likely image URL, width, height, exc.)                              |
+// Create a QR code instance
+const qr = createTelegramQR('https://t.me/yourusername');
 
-You can modify these options by spreading the `TELEGRAM_QR_CONFIG` object and overriding the properties you wish to change, as shown in the example above.
+// Download as PNG
+downloadTelegramQR('https://t.me/yourusername', 'my-telegram-qr');
+```
 
-## Contributing Guidelines
+### With Logo
 
-1.  Fork the repository.
-2.  Create a new branch for your feature or bug fix.
-3.  Make your changes and commit them with clear, concise messages.
-4.  Submit a pull request to the main branch.
+```javascript
+import { createTelegramQRWithLogo } from 'telegram-qr';
 
-Please follow the existing code style and include relevant tests.
+const qr = createTelegramQRWithLogo('https://t.me/yourusername', 'path/to/logo.png');
+```
 
-## License Information
+### Blue Telegram Theme
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.  *(Note: No LICENSE file was provided. You should create one and specify the proper MIT License)*
+```javascript
+import { createTelegramBlueQR } from 'telegram-qr';
 
-## Acknowledgments
+const qr = createTelegramBlueQR('https://t.me/yourusername');
+```
 
-*   This library utilizes the excellent [qrcode-styling](https://github.com/yuanqing/qrcode-styling) library.
+## API Reference
+
+### `createTelegramQR(data, options = {})`
+
+Creates a QR code instance with Telegram styling.
+
+- **Parameters**:
+  - `data` (string): The data to encode (e.g., Telegram login URL like `https://t.me/yourusername`).
+  - `options` (object): Configuration options.
+    - `width` (number): QR code width (default: 240).
+    - `height` (number): QR code height (default: 240).
+    - `dotsOptions` (object): Dot styling (e.g., `{ color: '#000000' }`).
+    - `cornersSquareOptions` (object): Corner square styling.
+    - `cornersDotOptions` (object): Corner dot styling.
+    - `backgroundOptions` (object): Background styling.
+    - `imageOptions` (object): Image/logo options (if using `image`).
+
+- **Returns**: `QRCodeStyling` instance (for further manipulation like `append()` to DOM).
+
+**Defaults** (from `TELEGRAM_QR_CONFIG`):
+```javascript
+{
+  width: 240,
+  height: 240,
+  type: "canvas",
+  qrOptions: {
+    typeNumber: 0,
+    mode: "Byte",
+    errorCorrectionLevel: "L"
+  },
+  dotsOptions: {
+    type: "rounded",
+    color: "#000000"
+  },
+  cornersSquareOptions: {
+    type: "extra-rounded",
+    color: "#000000"
+  },
+  cornersDotOptions: {
+    color: "#000000"
+  },
+  backgroundOptions: {
+    color: "#ffffff"
+  },
+  imageOptions: {
+    hideBackgroundDots: true,
+    imageSize: 1.0,
+    margin: 5
+  }
+}
+```
+
+### `createTelegramBlueQR(data, options = {})`
+
+Creates a blue-themed QR code (Telegram's brand color `#0088cc`).
+
+- **Parameters**: Same as `createTelegramQR`.
+- **Returns**: `QRCodeStyling` instance.
+
+### `createTelegramQRWithLogo(data, logoUrl, options = {})`
+
+Creates a QR code with a centered logo/image.
+
+- **Parameters**:
+  - `data` (string): Data to encode.
+  - `logoUrl` (string): URL or path to the logo image.
+  - `options` (object): Same as `createTelegramQR`.
+- **Returns**: `QRCodeStyling` instance.
+
+### `getTelegramQRDataURL(data, options = {})`
+
+Generates a base64 PNG data URL for the QR code.
+
+- **Parameters**: Same as `createTelegramQR`.
+- **Returns**: `Promise<string>` (data URL).
+
+```javascript
+const dataUrl = await getTelegramQRDataURL('https://t.me/yourusername');
+document.getElementById('qr-container').innerHTML = `<img src="${dataUrl}" />`;
+```
+
+### `downloadTelegramQR(data, filename = 'telegram-qr', options = {})`
+
+Downloads the QR code as a PNG file.
+
+- **Parameters**:
+  - `data` (string): Data to encode.
+  - `filename` (string): Download filename (default: 'telegram-qr').
+  - `options` (object): Same as `createTelegramQR`.
+- **Returns**: `Promise<void>`.
+
+### `TELEGRAM_QR_CONFIG`
+
+Exported constant with default configuration (see above).
+
+## Examples
+
+### Append to DOM
+
+```javascript
+import { createTelegramQR } from 'telegram-qr';
+
+const qr = createTelegramQR('https://t.me/yourusername');
+qr.append(document.getElementById('qr-container'));
+```
+
+### Custom Styling
+
+```javascript
+const qr = createTelegramQR('https://t.me/yourusername', {
+  width: 300,
+  dotsOptions: { color: '#ff0000' },
+  backgroundOptions: { color: '#f0f0f0' }
+});
+```
+
+### Node.js Usage (Server-Side Generation)
+
+```javascript
+const { getTelegramQRDataURL } = require('telegram-qr'); // CommonJS
+
+async function generateQR() {
+  const dataUrl = await getTelegramQRDataURL('https://t.me/yourusername');
+  // Use dataUrl (e.g., save to file or send in response)
+}
+generateQR();
+```
+
+## Browser Compatibility
+
+- Modern browsers (ES modules supported).
+- Device Pixel Ratio (DPR) scaling for high-DPI displays.
+
+## License
+
+MIT © [Coonlink](https://coonlink.com)
