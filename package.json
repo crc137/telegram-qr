@@ -1,0 +1,10 @@
+{
+  "name": "telegram-qr-lib",
+  "version": "1.0.0",
+  "description": "Telegram QR Code",
+  "main": "index.js",
+  "type": "module",
+  "keywords": ["qr", "telegram", "qrcode"],
+  "author": "",
+  "license": "MIT"
+}
