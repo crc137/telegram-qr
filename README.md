@@ -34,7 +34,7 @@ npm i git+https://github.com/crc137/telegram-qr.git
 Or via CDN:
 
 ```html
-<script type="module" src="[https://raw.coonlink.com/cloud/telegram-qr/index.js"></script>
+<script type="module" src="https://raw.coonlink.com/cloud/telegram-qr/index.js"></script>
 ```
 
 ## Quick Start
