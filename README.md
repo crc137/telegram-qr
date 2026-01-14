@@ -5,9 +5,6 @@
 
  A lightweight, self-contained JavaScript library for generating styled QR codes optimized for Telegram. Supports canvas rendering, custom configurations, blue-themed variants, logo overlays, data URLs, and direct downloads.
 
-[![npm version](https://badge.fury.io/js/telegram-qr.svg)](https://badge.fury.io/js/telegram-qr)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 [![English](https://img.shields.io/badge/lang-English%20🇺🇸-white)](README.md)
 [![Русский](https://img.shields.io/badge/язык-Русский%20🇷🇺-white)](README.ru.md)
 
@@ -31,13 +28,13 @@
 ## Installation
 
 ```bash
-npm install telegram-qr
+npm i git+https://github.com/crc137/telegram-qr.git
 ```
 
 Or via CDN:
 
 ```html
-<script type="module" src="https://unpkg.com/telegram-qr@1.0.0/dist/index.js"></script>
+<script type="module" src="[https://raw.coonlink.com/cloud/telegram-qr/index.js"></script>
 ```
 
 ## Quick Start
